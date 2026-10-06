@@ -1,4 +1,4 @@
-"""Модуль эмулятора командной строки ОС (Вариант №33, Этап 3)."""
+"""Модуль эмулятора командной строки ОС (Вариант №33, Финал: Этап 5)."""
 
 from __future__ import annotations
 
@@ -8,11 +8,18 @@ import os
 import socket
 import sys
 
+from commands import (
+    cmd_cd,
+    cmd_clear,
+    cmd_head,
+    cmd_help,
+    cmd_ls,
+    cmd_mkdir,
+)
 from vfs import VFS
 
 EXIT_SUCCESS = 0
 MIN_PARTS_COUNT = 1
-MAX_CD_ARGS = 1
 
 
 def get_prompt(vfs: VFS) -> str:
@@ -45,17 +52,17 @@ def execute_command(vfs: VFS, command: str, args: list[str]) -> tuple[bool, bool
             print("Ошибка: exit: неверные аргументы")
             return True, False
         return False, True
-    if command == "vfs-info":
-        return True, handle_vfs_info(vfs, args)
-    if command == "ls":
-        print(f"ls {args}")
-        return True, True
-    if command == "cd":
-        if len(args) > MAX_CD_ARGS:
-            print("Ошибка: cd: слишком много аргументов")
-            return True, False
-        print(f"cd {args}")
-        return True, True
+    handlers = {
+        "ls": lambda: cmd_ls(vfs, args),
+        "cd": lambda: cmd_cd(vfs, args),
+        "clear": lambda: cmd_clear(args),
+        "head": lambda: cmd_head(vfs, args),
+        "mkdir": lambda: cmd_mkdir(vfs, args),
+        "help": lambda: cmd_help(args),
+        "vfs-info": lambda: handle_vfs_info(vfs, args),
+    }
+    if command in handlers:
+        return True, handlers[command]()
     print(f"Ошибка: неизвестная команда '{command}'")
     return True, False
 

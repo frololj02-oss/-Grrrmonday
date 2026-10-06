@@ -1,0 +1,11 @@
+help
+vfs-info
+ls
+mkdir projects
+ls
+cd projects
+mkdir lab1
+ls
+cd /
+head readme.txt
+exit
