@@ -1,0 +1,11 @@
+<vfs name="deep_vfs">
+    <file name="readme.txt">SGVsbG8gZnJvbSBVTkJPLTA0LTI1IQ==</file>
+    <dir name="level1">
+        <file name="l1.txt">TGV2ZWwgMSBpbmZv</file>
+        <dir name="level2">
+            <dir name="level3">
+                <file name="deep.txt">RGVlcCBmaWxlIGNvbnRlbnQNCkxpbmUgMg==</file>
+            </dir>
+        </dir>
+    </dir>
+</vfs>
