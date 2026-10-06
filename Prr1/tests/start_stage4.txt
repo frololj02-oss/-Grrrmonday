@@ -1,0 +1,6 @@
+ls
+cd /level1
+ls
+head l1.txt
+clear
+exit
